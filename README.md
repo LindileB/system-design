@@ -34,3 +34,12 @@ System design concepts and real world implementations
 2. windows - execute powershell script
     ```
     .\test\test_rate_limiter.ps1
+
+# Consensus Algorithms
+
+### Simplified implementation of the below listed consensus algorithms
+- Paxos
+- Raft
+- Byzantine Fault Tolerance (BFT)
+- Proof of Work (PoW)
+- Proof of Stake (PoS)
