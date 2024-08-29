@@ -43,3 +43,13 @@ System design concepts and real world implementations
 - Byzantine Fault Tolerance (BFT)
 - Proof of Work (PoW)
 - Proof of Stake (PoS)
+
+# Unique ID Generation for Distributed System
+
+Design an ID gen solution that meets the following conditions:
+
+- IDs must be unique.
+- IDs are numerical values only.
+- IDs fit into 64-bit.
+- IDs are ordered by date.
+- Ability to generate over 10,000 unique IDs per second.
