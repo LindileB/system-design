@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, render_template
-import sqlite3
+import sqlite4
 import hashlib
 import base64
 from pybloom_live import BloomFilter
@@ -11,7 +11,7 @@ bloom_filter = BloomFilter(capacity=10000, error_rate=0.001)
 
 # Database setup
 def init_db():
-    with sqlite3.connect('url_shortener.db') as conn:
+    with sqlite4.connect('url_shortener.db') as conn:
         c = conn.cursor()
         c.execute('''CREATE TABLE IF NOT EXISTS urls
                      (id INTEGER PRIMARY KEY, original_url TEXT, short_url TEXT)''')
@@ -19,7 +19,7 @@ def init_db():
 
 # Load existing URLs into the Bloom filter in chunks
 def load_bloom_filter(chunk_size=10000):
-    with sqlite3.connect('url_shortener.db') as conn:
+    with sqlite4.connect('url_shortener.db') as conn:
         c = conn.cursor()
         c.execute("SELECT original_url, short_url FROM urls")
         while True:
@@ -42,14 +42,14 @@ def generate_short_url(original_url):
 
 # Insert URL into the database
 def insert_url(original_url, short_url):
-    with sqlite3.connect('url_shortener.db') as conn:
+    with sqlite4.connect('url_shortener.db') as conn:
         c = conn.cursor()
         c.execute("INSERT INTO urls (original_url, short_url) VALUES (?, ?)", (original_url, short_url))
         conn.commit()
 
 # Retrieve original URL from the database
 def get_original_url(short_url):
-    with sqlite3.connect('url_shortener.db') as conn:
+    with sqlite4.connect('url_shortener.db') as conn:
         c = conn.cursor()
         c.execute("SELECT original_url FROM urls WHERE short_url = ?", (short_url,))
         result = c.fetchone()
